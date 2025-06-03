@@ -1,6 +1,7 @@
 # Ledenadministratie
 
-Een PHP-gebaseerde webapplicatie voor het beheren van leden, contributies en jaaroverzichten voor een vereniging.
+Een PHP-gebaseerde webapplicatie voor het beheren van leden en contributies voor een vereniging. Deze applicatie is gemaakt als eindopdracht voor de opleiding Front-End Developer van LOI.
+Er zijn 3 accounts beschikbaar met elk hun eigen toegangsniveau. 
 
 ## Functionaliteiten
 
@@ -15,7 +16,7 @@ Een PHP-gebaseerde webapplicatie voor het beheren van leden, contributies en jaa
 1. Zorg ervoor dat je XAMPP (of vergelijkbare stack) hebt geïnstalleerd met PHP en MySQL
 2. Clone deze repository naar je `htdocs` map:
     ```bash
-    git clone https://github.com/BasdB97/ledenadministratie_final.git
+    git clone https://github.com/BasdB97/ledenadministratie
     ```
 3. Importeer de database:
 
@@ -23,17 +24,12 @@ Een PHP-gebaseerde webapplicatie voor het beheren van leden, contributies en jaa
     - Maak een nieuwe database aan genaamd `ledenadministratie`
     - Importeer het `database.sql` bestand uit de `database` map
 
-4. Configureer de database connectie:
-
-    - Kopieer `.env.example` naar `.env`
-    - Pas de database instellingen aan indien nodig
-
-5. Start je webserver en database
-6. Bezoek de applicatie via: http://localhost/ledenadministratie_final
+4. Start je webserver en database
+5. Bezoek de applicatie via: http://localhost/ledenadministratie
 
 ## Gebruikersaccounts
 
-De applicatie komt met drie vooraf ingestelde accounts:
+De applicatie is te gebruiken met de volgende accounts:
 
 1. **Beheerder**
 
@@ -44,8 +40,8 @@ De applicatie komt met drie vooraf ingestelde accounts:
 2. **Penningmeester**
 
     - Gebruikersnaam: `penningmeester`
-    - Wachtwoord: `penning123`
-    - Toegang tot contributies en jaaroverzichten
+    - Wachtwoord: `penningmeester123`
+    - Toegang tot contributies
 
 3. **Secretaris**
     - Gebruikersnaam: `secretaris`
@@ -56,14 +52,5 @@ De applicatie komt met drie vooraf ingestelde accounts:
 
 -   PHP 7.4 of hoger
 -   MySQL 5.7 of hoger
--   Apache/Nginx webserver
+-   Apache webserver
 -   Moderne webbrowser
-
-## Veiligheid
-
-Voor productiegebruik wordt sterk aangeraden om:
-
-1. De standaard wachtwoorden te wijzigen
-2. HTTPS te configureren
-3. De `.env` file buiten de webroot te plaatsen
-4. Regelmatig backups te maken van de database
