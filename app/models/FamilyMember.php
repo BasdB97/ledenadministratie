@@ -4,6 +4,16 @@
  * FamilyMember Klasse
  * 
  * Handelt alle familieleden in de database af
+ * 
+ * Functies:
+ * - Contributie van een familielid ophalen
+ * - Lidtype van een familielid ophalen
+ * - Alle familieleden van een familie ophalen
+ * - Alle familieleden van een boekjaar ophalen
+ * - Familielid op id ophalen
+ * - Familielid toevoegen
+ * - Familielid bewerken
+ * - Familielid verwijderen
  */
 class FamilyMember
 {

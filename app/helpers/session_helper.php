@@ -8,6 +8,8 @@ session_start();
  * Als de sessie bestaat, verwijder deze en stel de nieuwe waarde in
  * Als de sessie niet bestaat, stel de waarde in
  */
+
+// Sessie instellen
 function setSession($name = '', $value = '')
 {
   if (!empty($name) && !empty($value)) {

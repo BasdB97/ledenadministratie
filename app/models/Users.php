@@ -4,7 +4,12 @@
  * Users model
  * 
  * Handelt controleren van gebruikers en login af
+ * 
+ * Functies:
+ * - Controle of een gebruiker bestaat
+ * - Login functie
  */
+
 class Users
 {
   private $db;

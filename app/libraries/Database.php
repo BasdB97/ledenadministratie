@@ -1,4 +1,20 @@
 <?php
+
+/**
+ * Database
+ * 
+ * Verwerkt de database connectie en query's
+ * 
+ * Functies:
+ * - Database connectie maken
+ * - Query uitvoeren
+ * - Binden van waardes aan parameters
+ * - Query uitvoeren
+ * - Resultaat op verschillende manieren ophalen
+ * - Transacties starten, commiten en rollbacken
+ * 
+ */
+
 class Database
 {
   // Database gegevens
@@ -12,7 +28,7 @@ class Database
   private $stmt;
   private $error;
 
-  
+  // Database connectie maken
   public function __construct()
   {
     $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;

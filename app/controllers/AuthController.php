@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * AuthController
+ * 
+ * Controller voor het inloggen en uitloggen van gebruikers
+ * 
+ * Functies:
+ * - Inloggen
+ * - Uitloggen
+ * 
+ */
+
 class AuthController extends Controller
 {
   private $userModel;
@@ -19,6 +30,7 @@ class AuthController extends Controller
         'error' => '',
       ];
 
+      // Validatie 
       if (empty($data['username'])) {
         $data['error'] = 'Vul een gebruikersnaam in';
       }
@@ -26,13 +38,15 @@ class AuthController extends Controller
         $data['error'] = 'Vul een wachtwoord in';
       }
 
+      // Als er geen fouten zijn, controleer of de gebruiker bestaat
       if (empty($data['error'])) {
         if ($this->userModel->findUserByUsername($data['username'])) {
+          // Als de gebruiker bestaat, log de gebruiker in
           $loggedInUser = $this->userModel->login($data['username'], $data['password']);
           if ($loggedInUser) {
+            // Als de gebruiker is ingelogd, stel de sessie in
             setSession('username', $loggedInUser->username);
             setSession('userRole', $loggedInUser->role);
-            setSession('loggedIn', true);
             redirect('yearselection/index');
           } else {
             $data['error'] = 'Wachtwoord is incorrect';
@@ -47,6 +61,7 @@ class AuthController extends Controller
     $this->view('auth/login');
   }
 
+  // Bij uitloggen wordt de sessie verwijderd
   public function logout()
   {
     session_unset();

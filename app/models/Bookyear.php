@@ -4,7 +4,17 @@
  * Bookyear model
  * 
  * Ophalen en beheren van boekjaren
+ * 
+ * Functies:
+ * - Alle boekjaren ophalen
+ * - Boekjaar op jaar ophalen
+ * - Boekjaar op id ophalen
+ * - Totaalbedrag van contributies ophalen
+ * - Boekjaar toevoegen
+ * - Boekjaar bewerken
+ * - Boekjaar verwijderen
  */
+
 class Bookyear
 {
   private $db;
