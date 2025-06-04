@@ -1,15 +1,11 @@
 # Ledenadministratie
 
-Een PHP-gebaseerde webapplicatie voor het beheren van leden en contributies voor een vereniging. Deze applicatie is gemaakt als eindopdracht voor de opleiding Front-End Developer van LOI.
-Er zijn 3 accounts beschikbaar met elk hun eigen toegangsniveau. 
+'Ledenadministratie' is een PHP & MySQL CRUD-applicatie voor het beheren van leden en contributies voor een vereniging. Dit project is gemaakt als eindopdracht voor de module PHP & MySQL van de opleiding Front-End Developer van LOI. In de applicatie kunnen families en leden worden toegevoegd, gewijzigd en verwijderd. Per lid wordt er contributie toegevoegd, dit is gekoppeld aan een boekjaar.
+Er zijn 3 accounts beschikbaar met elk hun eigen toegangsniveau. De admin heeft alle rechten, de penningmeester heeft alleen toegang tot de contributies en de secretaris heeft alleen toegang tot het ledenbeheer.
+De applicatie biedt een gebruiksvriendelijke interface waarmee de gebruiker makkelijk leden en contributies kan toevoegen, wijzigen en verwijderen.
+Ook heeft de applicatie enkele beveiligingsfunctionaliteiten zoals het controleren en sanitizen van ingevulde gegevens, hashen van wachtwoorden, routing en een authenticatie systeem.
 
-## Functionaliteiten
-
--   Beheer van leden en hun gegevens
--   Beheer van contributies per lid
--   Genereren van jaaroverzichten
--   Beheer van familie-eenheden
--   Gebruikersbeheer met verschillende toegangsniveaus
+Omdat er in dit project niet alle beveiligingsfunctionaliteiten zijn toegepast, is het niet geschikt voor productie maar enkel voor lokaal gebruik.
 
 ## Installatie
 
@@ -54,3 +50,24 @@ De applicatie is te gebruiken met de volgende accounts:
 -   MySQL 5.7 of hoger
 -   Apache webserver
 -   Moderne webbrowser
+
+## Apache Configuratie
+
+Om de .htaccess bestanden correct te laten werken, moet je de volgende Apache modules en instellingen activeren:
+
+1. Open het Apache configuratiebestand (`httpd.conf`) in je XAMPP installatie
+2. Zorg ervoor dat de volgende modules zijn geactiveerd (verwijder het # teken indien aanwezig):
+    ```
+    LoadModule rewrite_module modules/mod_rewrite.so
+    ```
+3. Zoek de `<Directory>` sectie voor je htdocs map en zorg ervoor dat `AllowOverride` is ingesteld op `All`:
+    ```
+    <Directory "C:/xampp/htdocs">
+        Options Indexes FollowSymLinks Includes ExecCGI
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ```
+4. Herstart Apache na het maken van deze wijzigingen
+
+Zonder deze configuratie zullen de URL-rewriting en andere .htaccess functionaliteiten niet werken.
