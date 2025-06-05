@@ -4,6 +4,7 @@
  * Dashboard model
  * 
  * Haalt de dashboard informatie op
+ * 
  */
 
 class Dashboard
@@ -18,9 +19,9 @@ class Dashboard
 
   /*
     * Haalt de volgende gegevens op:
-    * - Alles van de tabel family
+    * - Alles uit de tabel family
     * - De voornaam, geboortedatum en aantal leden van een familie uit de family_members tabel
-    * - Het totaalbedrag van de contributies in het gekozen boekjaar uit de contributions tabel
+    * - Het totaalbedrag van de contributies in het gekozen boekjaar van een familie uit de contributions tabel
   */
   public function getDashboardInformation($bookyearId)
   {

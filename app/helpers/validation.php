@@ -1,4 +1,16 @@
 <?php
+
+/**
+ * validation.php
+ * 
+ * Helper functies voor formulieren
+ * 
+ * Functies:
+ * - Validatie functie voor formulieren
+ * - Controleert of er errors zijn
+ * 
+ */
+
 // Validatie functie voor formulieren
 function validateForm($data)
 {

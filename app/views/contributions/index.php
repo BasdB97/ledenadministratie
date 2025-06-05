@@ -61,39 +61,43 @@
   <div class="bg-white rounded-lg shadow-md p-6 mb-6">
     <h3 class="text-xl font-semibold mb-4">Contributie overzicht boekjaar <?php echo $_SESSION['bookyear']; ?></h3>
     <h3 class="text-m mb-4 text-gray-700">Hier kunt u contributies betalen of verwijderen.</h3>
-    <table class="min-w-full bg-white">
-      <thead>
-        <tr class="bg-gray-100">
-          <th class="w-1/4 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Voornaam</th>
-          <th class="w-1/4 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Achternaam</th>
-          <th class="w-1/4 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Openstaande contributie</th>
-          <th class="w-1/4 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Acties</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($data['familyMembers'] as $member) : ?>
-          <tr class="border-b">
-            <td class="px-6 py-4"><?php echo $member->first_name; ?></td>
-            <td class="px-6 py-4 hover:underline hover:text-blue-500"><a href="<?php echo URL_ROOT; ?>/family/listFamilyDetails/<?php echo $member->family_id; ?>"><?php echo $member->last_name; ?></a></td>
-            <td class="px-6 py-4 <?php echo ($member->outstanding_contribution > 0) ? 'text-red-600' : 'text-green-600'; ?>">€<?php echo number_format($member->outstanding_contribution, 2); ?></td>
-            <td class="px-6 py-4 space-x-2">
-              <?php if ($_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'penningmeester'): ?>
-                <a href="<?php echo URL_ROOT; ?>/contributions/addContribution/<?php echo $member->id; ?>" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm">
-                  <i class="fas fa-credit-card mr-2"></i>
-                  Betalen
-                </a>
-              <?php endif; ?>
-              <?php if ($_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'secretaris'): ?>
-                <a href="<?php echo URL_ROOT; ?>/contributions/deleteContribution/<?php echo $member->id; ?>" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm" onclick="return confirm('Weet u zeker dat u dit familielid wilt verwijderen? Hiermee verwijdert u ook alle contributies');">
-                  <i class="fas fa-trash mr-2"></i>
-                  Verwijderen
-                </a>
-              <?php endif; ?>
-            </td>
+    <?php if (empty($data['familyMembers'])): ?>
+      <div class="text-center text-red-500 py-8">Geen contributie gevonden.</div>
+    <?php else: ?>
+      <table class="min-w-full bg-white">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="w-1/4 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Voornaam</th>
+            <th class="w-1/4 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Achternaam</th>
+            <th class="w-1/4 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Openstaande contributie</th>
+            <th class="w-1/4 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Acties</th>
           </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <?php foreach ($data['familyMembers'] as $member) : ?>
+            <tr class="border-b">
+              <td class="px-6 py-4"><?php echo $member->first_name; ?></td>
+              <td class="px-6 py-4 hover:underline hover:text-blue-500"><a href="<?php echo URL_ROOT; ?>/family/listFamilyDetails/<?php echo $member->family_id; ?>"><?php echo $member->last_name; ?></a></td>
+              <td class="px-6 py-4 <?php echo ($member->outstanding_contribution > 0) ? 'text-red-600' : 'text-green-600'; ?>">€<?php echo number_format($member->outstanding_contribution, 2); ?></td>
+              <td class="px-6 py-4 space-x-2">
+                <?php if ($_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'penningmeester'): ?>
+                  <a href="<?php echo URL_ROOT; ?>/contributions/addContribution/<?php echo $member->id; ?>" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm">
+                    <i class="fas fa-credit-card mr-2"></i>
+                    Betalen
+                  </a>
+                <?php endif; ?>
+                <?php if ($_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'secretaris'): ?>
+                  <a href="<?php echo URL_ROOT; ?>/contributions/deleteContribution/<?php echo $member->id; ?>" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm" onclick="return confirm('Weet u zeker dat u dit familielid wilt verwijderen? Hiermee verwijdert u ook alle contributies');">
+                    <i class="fas fa-trash mr-2"></i>
+                    Verwijderen
+                  </a>
+                <?php endif; ?>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    <?php endif; ?>
     <?php if (!empty($data['bookyear_err'])): ?>
       <p class="mt-1 text-sm text-red-500"><?php echo $data['bookyear_err']; ?></p>
     <?php endif; ?>

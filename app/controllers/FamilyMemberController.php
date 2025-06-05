@@ -5,6 +5,12 @@
  * 
  * Controller voor het beheren van familieleden
  * 
+ * Functies:
+ * - Familieleden toevoegen
+ * - Familieleden bewerken
+ * - Familieleden verwijderen
+ * - Contributie en type lid bepalen
+ * 
  */
 
 class FamilyMemberController extends Controller

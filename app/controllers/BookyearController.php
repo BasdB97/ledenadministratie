@@ -1,5 +1,17 @@
 <?php
 
+/**
+ * BookyearController
+ * 
+ * Controller voor het beheren van boekjaren
+ * 
+ * Functies:
+ * - Boekjaar toevoegen
+ * - Boekjaar bewerken
+ * - Boekjaar verwijderen
+ * 
+ */
+
 class BookyearController extends Controller
 {
   private $bookyearModel;
@@ -19,6 +31,7 @@ class BookyearController extends Controller
         'description_err' => '',
       ];
 
+      // Validatie
       if (!is_numeric($data['year'])) {
         $data['year_err'] = 'Jaar moet een getal zijn.';
       } else if (strlen($data['year']) != 4) {
@@ -27,6 +40,7 @@ class BookyearController extends Controller
         $data['year_err'] = 'Boekjaar bestaat al.';
       }
 
+      // Als er geen fouten zijn, voeg het boekjaar toe
       if (empty($data['year_err'])) {
         if ($this->bookyearModel->addBookyear($data)) {
           flash('bookyear_message', 'Boekjaar succesvol toegevoegd.', 'alert-success');
@@ -44,7 +58,9 @@ class BookyearController extends Controller
 
   public function editBookyear($year)
   {
-    $bookyear = $this->bookyearModel->getBookyearByYear($year);
+    // Haal het boekjaar op
+    $bookyear = $this->bookyearModel->getBookyearByYear((int)$year);
+    // Als het boekjaar bestaat en het is het actieve boekjaar, geef een foutmelding
     if ($bookyear && $bookyear->year == $_SESSION['bookyear']) {
       flash('bookyear_message', 'Een actief boekjaar kan niet worden bewerkt.', 'alert-danger');
       redirect('contributions/index');
@@ -59,17 +75,18 @@ class BookyearController extends Controller
         'year_err' => '',
         'description_err' => '',
       ];
-
+      // Als het jaar is gewijzigd, controleer of het jaar geldig is
       if ($data['year'] !== $bookyear->year) {
         if (!is_numeric($data['year'])) {
           $data['year_err'] = 'Jaar moet een getal zijn.';
         } else if (strlen($data['year']) != 4) {
           $data['year_err'] = 'Jaar moet 4 cijfers lang zijn.';
-        } else if ($this->bookyearModel->getBookyearByYear($data['year'])) {
+        } else if ($this->bookyearModel->getBookyearByYear($data['year'])) { // Controleer of het jaar bestaat
           $data['year_err'] = 'Boekjaar bestaat al.';
         }
       }
 
+      // Als er geen fouten zijn, werk het boekjaar bij
       if (empty($data['year_err'])) {
         if ($this->bookyearModel->editBookyear($data)) {
           flash('bookyear_message', 'Boekjaar succesvol bijgewerkt.', 'alert-success');
@@ -90,14 +107,17 @@ class BookyearController extends Controller
 
   public function deleteBookyear($bookyearId)
   {
+    // Haal het boekjaar op
     $bookyear = $this->bookyearModel->getBookyearById((int)$bookyearId);
 
+    // Als het boekjaar actief is, geef een foutmelding
     if ($bookyear && $bookyear->year == $_SESSION['bookyear']) {
       flash('bookyear_message', 'Het actieve boekjaar kan niet worden verwijderd.', 'alert-danger');
       redirect('contributions/index');
       return;
     }
 
+    // Verwijder het boekjaar
     if ($this->bookyearModel->deleteBookyear((int)$bookyearId)) {
       flash('bookyear_message', 'Boekjaar succesvol verwijderd.', 'alert-success');
       redirect('contributions/index');

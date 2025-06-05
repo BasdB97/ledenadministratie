@@ -2,7 +2,17 @@
 
 /**
  * Family Klasse
+ * 
  * Handelt alle familiegegevens in de database af
+ * 
+ * Functies:
+ * - Alle families ophalen
+ * - Familie op id ophalen
+ * - Controle of een adres al bestaat in de database
+ * - Familie toevoegen
+ * - Familie bewerken
+ * - Familie verwijderen
+ * 
  */
 class Family
 {

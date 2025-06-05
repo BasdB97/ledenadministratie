@@ -3,7 +3,7 @@
 /**
  * Core class
  * 
- * Deze class handelt de core logica van de applicatie af
+ * Handelt de URL opname en routing af, stelt de controller en method in en geeft de parameters mee
  * 
  */
 class Core
@@ -49,11 +49,7 @@ class Core
     call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
   }
 
-  /**
-   * Haalt de URL op, maakt deze schoon en splitst deze in een array
-   * 
-   * @return array|false Array met de URL of false als er geen URL is
-   */
+  // Haalt de URL op, maakt deze schoon en splitst deze in een array
   public function getUrl()
   {
     if (isset($_GET['url'])) {

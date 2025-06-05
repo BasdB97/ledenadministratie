@@ -3,7 +3,8 @@
 /**
  * Basis controller klasse
  * 
- * Laad de Models en Views
+ * Laad de models en views
+ * 
  */
 class Controller
 {

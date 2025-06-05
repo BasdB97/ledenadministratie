@@ -4,6 +4,13 @@
  * Contribution model
  * 
  * Handelt contributies in de database af
+ * 
+ * Functies:
+ * - Controle of contributie bestaat
+ * - Contributie toevoegen
+ * - Contributie bewerken
+ * - Contributie verwijderen
+ * 
  */
 class Contribution
 {

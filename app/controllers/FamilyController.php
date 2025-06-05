@@ -1,24 +1,36 @@
 <?php
 
+/**
+ * FamilyController
+ * 
+ * Controller voor het beheren van families
+ * - Alle families weergeven
+ * - Familie toevoegen
+ * - Familie bewerken
+ * - Familie verwijderen
+ * - Familie details bekijken
+ * 
+ */
+
 class FamilyController extends Controller
 {
   private $familyModel;
   private $familyMemberModel;
-  private $bookyearModel;
   private $bookyearId;
 
   public function __construct()
   {
     $this->familyModel = $this->model('Family');
     $this->familyMemberModel = $this->model('FamilyMember');
-    $this->bookyearModel = $this->model('Bookyear');
-    $this->bookyearId = $this->bookyearModel->getBookyearByYear((int)$_SESSION['bookyear'])->id;
+    $this->bookyearId = $_SESSION['bookyearId'];
   }
 
   public function index()
   {
+    // Haal alle families op
     $families = $this->familyModel->getAllFamilies();
 
+    // Sorteer families op achternaam
     usort($families, function ($a, $b) {
       return strcmp($a->last_name, $b->last_name);
     });
@@ -36,11 +48,12 @@ class FamilyController extends Controller
 
       $data = validateForm($data);
 
-      // Controleer adresuniekheid
+      // Controleer of het adres bestaat en of het adres al bestaat voor een andere familie
       if (!checkErrors($data) && $this->familyModel->checkAddressExists($data)) {
         $data['address_err'] = 'Er woont al een familie op dit adres.';
       }
 
+      // Als er geen fouten zijn, voeg de familie toe
       if (!checkErrors($data)) {
         if ($this->familyModel->addFamily($data)) {
           flash('family_message', 'Familie succesvol toegevoegd!', 'alert-success');
@@ -62,16 +75,16 @@ class FamilyController extends Controller
     $family = $this->familyModel->getFamilyById($familyId);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      // Haal de formuliergegevens op
-      $data = $this->retrieveFormData();
       $data['family_id'] = $familyId;
-
-      // Valideer formulier
+      $data = $this->retrieveFormData();
       $data = validateForm($data);
-      // Controleer adresuniekheid (exclusief huidige familie)
+
+      // Controleer of het adres bestaat en of het adres al bestaat voor een andere familie
       if (!checkErrors($data) && $this->familyModel->checkAddressExists($data)) {
         $data['address_err'] = 'Er woont al een familie op dit adres.';
       }
+
+      // Als er geen fouten zijn, werk de familie bij
       if (!checkErrors($data)) {
         if ($this->familyModel->updateFamily($data)) {
           flash('family_message', 'Familie succesvol bijgewerkt.', 'alert-success');
@@ -85,6 +98,7 @@ class FamilyController extends Controller
       }
     } else {
 
+      // Data van familie om in het formulier te zetten
       $data = [
         'family_id' => $familyId,
         'family' => $family,
@@ -102,7 +116,6 @@ class FamilyController extends Controller
   public function deleteFamily($familyId)
   {
     if ($this->familyModel->deleteFamily($familyId, $this->bookyearId)) {
-
       flash('family_message', 'Familie en bijbehorende gegevens succesvol verwijderd.', 'alert-success');
       header('Location: ' . $_SERVER['HTTP_REFERER']);
       exit;
@@ -121,17 +134,23 @@ class FamilyController extends Controller
       'family_members' => $this->familyMemberModel->getFamilyMembersByFamilyId($familyId),
     ];
 
+    // Bereken het totaalbedrag van de contributies 
     $data['family']->total_contribution = 0;
     foreach ($data['family_members'] as $familyMember) {
       $contribution = $this->familyMemberModel->getMemberContribution($familyMember->id, $this->bookyearId);
+      // Als er contributie is, sla dit op, als er geen contributie is, sla 0 op
       $familyMember->contribution = $contribution ? $contribution->amount : 0;
+      // Tel het totaalbedrag van de contributies op
       $data['family']->total_contribution += $familyMember->contribution;
+
+      // Haal het type van het familielid op
       $familyMember->member_type = $this->familyMemberModel->getMemberType($familyMember->id)->description;
     }
 
     $this->view('family/FamilyDetails', $data);
   }
 
+  // Functie om de formuliergegevens op te halen en te sanitizen
   public function retrieveFormData()
   {
     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);

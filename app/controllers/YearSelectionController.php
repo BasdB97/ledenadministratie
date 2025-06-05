@@ -1,10 +1,14 @@
 <?php
 
 /**
+ * YearSelectionController
+ * 
  * Controller voor het selecteren van een boekjaar
  * 
- * Haalt alle boekjaren op en geeft deze mee aan de view
- * Na het selecteren van een boekjaar, wordt deze opgeslagen in de session
+ * Functies:
+ * - Alle boekjaren weergeven
+ * - Boekjaar selecteren
+ * 
  */
 class YearSelectionController extends Controller
 {

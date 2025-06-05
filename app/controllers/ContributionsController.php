@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * ContributionsController
+ * 
+ * Controller voor het beheren van contributies
+ * 
+ * Functies:
+ * - Contributies toevoegen
+ * - Betaling verwerken
+ * - Contributies verwijderen
+ * - Familieleden selecteren
+ * 
+ */
+
 class ContributionsController extends Controller
 {
   private $bookyearModel;
@@ -33,6 +46,7 @@ class ContributionsController extends Controller
 
   public function addContribution($familyMemberId)
   {
+    // Haal data van het familielid in het boekjaar op om weer te geven
     $data = [
       'familyMember' => $this->familyMemberModel->getMemberContribution($familyMemberId, $this->bookyearId),
       'bookyear' => $this->bookyearModel->getBookyearById($this->bookyearId),
@@ -42,8 +56,8 @@ class ContributionsController extends Controller
 
   public function processPayment($familyMemberId)
   {
+    // Haal data van het familielid in het boekjaar op om weer te gevens
     $familyMember = $this->familyMemberModel->getMemberContribution($familyMemberId, $this->bookyearId);
-
     $data = [
       'bookyear' => $this->bookyearModel->getBookyearById($this->bookyearId),
       'bookyearId' => $this->bookyearId,
@@ -57,7 +71,7 @@ class ContributionsController extends Controller
       // Bereken de resterende contributie
       $data['newContributionAmount'] = $familyMember->amount - $contributionAmount;
 
-      // Controleer of het contributiebedrag geldig is
+      // Controleer of het contributiebedrag geldig is en niet hoger dan de resterende contributie
       if ($contributionAmount === false) {
         flash('contribution_error', 'Ongeldige contributiebedrag', 'alert-danger');
       } else if ($contributionAmount > $familyMember->amount) {
@@ -98,9 +112,10 @@ class ContributionsController extends Controller
 
   public function selectFamilyMember($familyId)
   {
+    // Haal alle familieleden op om weer te geven
     $familyMembers = $this->familyMemberModel->getFamilyMembersByFamilyId($familyId);
 
-    // Get contribution for each family member
+    // Haal de contributie op voor elke familielid en controleer of de contributie bestaat
     foreach ($familyMembers as $member) {
       $contribution = $this->familyMemberModel->getMemberContribution($member->id, $this->bookyearId);
       if ($contribution) {
