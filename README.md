@@ -18,10 +18,32 @@ Omdat er in dit project niet alle beveiligingsfunctionaliteiten zijn toegepast, 
 
     - Open phpMyAdmin (http://localhost/phpmyadmin)
     - Maak een nieuwe database aan genaamd `ledenadministratie`
-    - Importeer het `database.sql` bestand uit de `database` map
+    - Importeer het `creatiescript.sql` bestand uit de `database` map
+    - Importeer het `data.sql` bestand uit de `database` map
 
 4. Start je webserver en database
 5. Bezoek de applicatie via: http://localhost/ledenadministratie
+
+## Apache Configuratie
+
+Om de .htaccess bestanden correct te laten werken, moet je de volgende Apache modules en instellingen activeren:
+
+1. Open het Apache configuratiebestand (`httpd.conf`) in je XAMPP installatie
+2. Zorg ervoor dat de volgende modules zijn geactiveerd (verwijder het # teken indien aanwezig):
+    ```
+    LoadModule rewrite_module modules/mod_rewrite.so
+    ```
+3. Zoek de `<Directory>` sectie voor je htdocs map en zorg ervoor dat `AllowOverride` is ingesteld op `All`:
+    ```
+    <Directory "C:/xampp/htdocs">
+        Options Indexes FollowSymLinks Includes ExecCGI
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ```
+4. Herstart Apache na het maken van deze wijzigingen
+
+Zonder deze configuratie zullen de URL-rewriting en andere .htaccess functionaliteiten niet werken.
 
 ## Gebruikersaccounts
 
@@ -50,24 +72,3 @@ De applicatie is te gebruiken met de volgende accounts:
 -   MySQL 5.7 of hoger
 -   Apache webserver
 -   Moderne webbrowser
-
-## Apache Configuratie
-
-Om de .htaccess bestanden correct te laten werken, moet je de volgende Apache modules en instellingen activeren:
-
-1. Open het Apache configuratiebestand (`httpd.conf`) in je XAMPP installatie
-2. Zorg ervoor dat de volgende modules zijn geactiveerd (verwijder het # teken indien aanwezig):
-    ```
-    LoadModule rewrite_module modules/mod_rewrite.so
-    ```
-3. Zoek de `<Directory>` sectie voor je htdocs map en zorg ervoor dat `AllowOverride` is ingesteld op `All`:
-    ```
-    <Directory "C:/xampp/htdocs">
-        Options Indexes FollowSymLinks Includes ExecCGI
-        AllowOverride All
-        Require all granted
-    </Directory>
-    ```
-4. Herstart Apache na het maken van deze wijzigingen
-
-Zonder deze configuratie zullen de URL-rewriting en andere .htaccess functionaliteiten niet werken.
