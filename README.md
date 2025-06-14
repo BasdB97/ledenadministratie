@@ -14,7 +14,10 @@ Omdat er in dit project niet alle beveiligingsfunctionaliteiten zijn toegepast, 
     ```bash
     git clone https://github.com/BasdB97/ledenadministratie
     ```
-3. Importeer de database:
+
+    [!IMPORTANT]
+   Zorg dat de map waar het project in staat `ledenadministratie` heet. Bij het downloaden van het project komt er `-master` achter te staan. Haal dit weg.
+4. Importeer de database:
 
     - Open phpMyAdmin (http://localhost/phpmyadmin)
     - Maak een nieuwe database aan genaamd `ledenadministratie`
@@ -22,8 +25,8 @@ Omdat er in dit project niet alle beveiligingsfunctionaliteiten zijn toegepast, 
     - Importeer het `data.sql` bestand uit de `database` map
     - De applicatie is nu gereed voor gebruik
 
-4. Start je webserver en database
-5. Bezoek de applicatie via: http://localhost/ledenadministratie
+5. Start je webserver en database
+6. Bezoek de applicatie via: http://localhost/ledenadministratie
 
 ## Apache Configuratie
 
