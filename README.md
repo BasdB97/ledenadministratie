@@ -20,6 +20,7 @@ Omdat er in dit project niet alle beveiligingsfunctionaliteiten zijn toegepast, 
     - Maak een nieuwe database aan genaamd `ledenadministratie`
     - Importeer het `creatiescript.sql` bestand uit de `database` map
     - Importeer het `data.sql` bestand uit de `database` map
+    - De applicatie is nu gereed voor gebruik
 
 4. Start je webserver en database
 5. Bezoek de applicatie via: http://localhost/ledenadministratie
