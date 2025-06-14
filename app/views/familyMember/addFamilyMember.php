@@ -38,6 +38,21 @@
         </div>
 
         <div class="mb-4">
+          <label for="family_member_type" class="block text-sm font-medium text-gray-700 mb-1">Relatie</label>
+          <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            id="family_member_type" name="family_member_type" required>
+            <option value="">Selecteer de relatie</option>
+            <option value="Vader">Vader</option>
+            <option value="Moeder">Moeder</option>
+            <option value="Zoon">Zoon</option>
+            <option value="Dochter">Dochter</option>
+            <option value="Neef">Neef</option>
+            <option value="Nicht">Nicht</option>
+            <option value="Anders">Anders</option>
+          </select>
+        </div>
+
+        <div class="mb-4">
           <label for="date_of_birth" class="block text-sm font-medium text-gray-700 mb-1">Geboortedatum</label>
           <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             id="date_of_birth" name="date_of_birth" required>

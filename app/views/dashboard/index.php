@@ -66,7 +66,7 @@
 
             <?php if ($_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'penningmeester'): ?>
               <a href="<?php echo URL_ROOT; ?>/contributions/selectFamilyMember/<?php echo $family->id; ?>"
-                class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md transition-colors duration-200 flex items-center text-sm">
+                class="bg-green-800 hover:bg-green-900 text-white py-2 px-4 rounded-md transition-colors duration-200 flex items-center text-sm">
                 <i class="fa-solid fa-credit-card mr-2"></i> Betalen
               </a>
             <?php endif; ?>

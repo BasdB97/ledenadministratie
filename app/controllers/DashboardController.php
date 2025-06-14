@@ -5,7 +5,7 @@
  * 
  * Controller voor het beheren van de dashboard
  * 
- * Functies:
+ * Functie:
  * - Alle familiesdetails weergeven
  * 
  */

@@ -75,6 +75,7 @@ class BookyearController extends Controller
         'year_err' => '',
         'description_err' => '',
       ];
+      
       // Als het jaar is gewijzigd, controleer of het jaar geldig is
       if ($data['year'] !== $bookyear->year) {
         if (!is_numeric($data['year'])) {

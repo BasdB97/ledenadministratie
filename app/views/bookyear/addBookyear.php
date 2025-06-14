@@ -42,14 +42,15 @@
       </div>
 
       <div class="flex justify-end space-x-4">
-        <a href="<?php echo URL_ROOT; ?>/contributions/index"
-          class="inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors">
-          Annuleren
-        </a>
         <button type="submit"
           class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
           <i class="fas fa-plus mr-2"></i> Boekjaar toevoegen
         </button>
+        <a href="<?php echo URL_ROOT; ?>/contributions/index"
+          class="inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors">
+          Annuleren
+        </a>
+
       </div>
 
     </form>

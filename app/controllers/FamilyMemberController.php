@@ -28,7 +28,6 @@ class FamilyMemberController extends Controller
     $this->bookyearId = $this->bookyearModel->getBookyearByYear((int)$_SESSION['bookyear'])->id;
   }
 
-
   public function addFamilyMember($familyId)
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -77,7 +76,7 @@ class FamilyMemberController extends Controller
     } else {
 
       $data = [
-        'familyMember' => $familyMember,
+        'family_member_type' => $familyMember->family_member_type,
         'family_member_id' => $familyMemberId,
         'family_id' => $familyMember->family_id,
         'first_name' => $familyMember->first_name,
@@ -96,6 +95,7 @@ class FamilyMemberController extends Controller
     }
   }
 
+  // Haal de gegevens op uit het formulier en sanitize de data
   public function retrieveFormData($familyId, $familyMemberId = null)
   {
     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -103,9 +103,11 @@ class FamilyMemberController extends Controller
       'family_id' => $familyId,
       'family_member_id' => $familyMemberId,
       'first_name' => trim($_POST['first_name']),
+      'family_member_type' => trim($_POST['family_member_type']),
       'date_of_birth' => trim($_POST['date_of_birth']),
       'bookyear_id' => $this->bookyearId,
       'first_name_err' => '',
+      'family_member_type_err' => '',
       'date_of_birth_err' => '',
     ];
     return $data;
@@ -134,40 +136,15 @@ class FamilyMemberController extends Controller
       }
     }
 
-    // Bereken leeftijd en member_type
+    // Bereken leeftijd en type lid
     if (empty($data['date_of_birth_err'])) {
-      $currentDate = new DateTime();
-      $age = $currentDate->diff($birthDate)->y;
-      $data['age'] = $age;
-      switch (true) {
-        case ($age < 8):
-          $data['member_type_id'] = 1;
-          $data['discount_percentage'] = 55;
-          break;
-        case ($age >= 8 && $age <= 12):
-          $data['member_type_id'] = 2;
-          $data['discount_percentage'] = 40;
-          break;
-        case ($age >= 13 && $age <= 17):
-          $data['member_type_id'] = 3;
-          $data['discount_percentage'] = 25;
-          break;
-        case ($age >= 18 && $age <= 50):
-          $data['member_type_id'] = 4;
-          $data['discount_percentage'] = 0;
-          break;
-        case ($age >= 51):
-          $data['member_type_id'] = 5;
-          $data['discount_percentage'] = 45;
-          break;
-        default:
-          $data['date_of_birth_err'] = 'Ongeldige leeftijd.';
-      }
+      $memberData = calculateAgeAndDiscount($data['date_of_birth']);
+      $data['age'] = $memberData['age'];
+      $data['member_type_id'] = $memberData['member_type_id'];
+      $data['discount_percentage'] = $memberData['discount_percentage'];
 
       // Bereken contributie
-      if (empty($data['date_of_birth_err'])) {
-        $data['contribution_amount'] = round(100 * (1 - $data['discount_percentage'] / 100));
-      }
+      $data['contribution_amount'] = round(100 * (1 - $data['discount_percentage'] / 100));
     }
 
     // Check of er geen fouten zijn

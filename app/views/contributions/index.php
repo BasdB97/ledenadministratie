@@ -14,6 +14,7 @@
       </a>
     </div>
     <h2 class="text-lg text-gray-700">Hieronder kunt u een boekjaar toevoegen of verwijderen. Ook kunt u de omschrijving van de boekjaren aanpassen.
+      <h3 class="text-m text-gray-700">Wanneer een nieuw boekjaar wordt toegevoegd, worden de contributies voor alle bestaande leden automatisch berekend.</h3>
       <h3 class="text-m mb-4 text-gray-700">Een actief boekjaar kan niet worden verwijderd. Selecteer eerst een ander boekjaar voordat u een boekjaar verwijdert.</h3>
       <div class="overflow-x-auto">
         <table class="min-w-full bg-white">
@@ -60,7 +61,7 @@
   <h2 class="text-3xl font-bold mb-6">Contributie beheer</h2>
   <div class="bg-white rounded-lg shadow-md p-6 mb-6">
     <h3 class="text-xl font-semibold mb-4">Contributie overzicht boekjaar <?php echo $_SESSION['bookyear']; ?></h3>
-    <h3 class="text-m mb-4 text-gray-700">Hier kunt u contributies betalen of verwijderen.</h3>
+    <h3 class="text-m mb-4 text-gray-700">Hier kunt u contributies betalingen uitvoeren.</h3>
     <?php if (empty($data['familyMembers'])): ?>
       <div class="text-center text-red-500 py-8">Geen contributie gevonden.</div>
     <?php else: ?>
@@ -75,25 +76,28 @@
         </thead>
         <tbody>
           <?php foreach ($data['familyMembers'] as $member) : ?>
-            <tr class="border-b">
-              <td class="px-6 py-4"><?php echo $member->first_name; ?></td>
-              <td class="px-6 py-4 hover:underline hover:text-blue-500"><a href="<?php echo URL_ROOT; ?>/family/listFamilyDetails/<?php echo $member->family_id; ?>"><?php echo $member->last_name; ?></a></td>
-              <td class="px-6 py-4 <?php echo ($member->outstanding_contribution > 0) ? 'text-red-600' : 'text-green-600'; ?>">€<?php echo number_format($member->outstanding_contribution, 2); ?></td>
-              <td class="px-6 py-4 space-x-2">
-                <?php if ($_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'penningmeester'): ?>
-                  <a href="<?php echo URL_ROOT; ?>/contributions/addContribution/<?php echo $member->id; ?>" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm">
-                    <i class="fas fa-credit-card mr-2"></i>
-                    Betalen
-                  </a>
-                <?php endif; ?>
-                <?php if ($_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'secretaris'): ?>
-                  <a href="<?php echo URL_ROOT; ?>/contributions/deleteContribution/<?php echo $member->id; ?>" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm" onclick="return confirm('Weet u zeker dat u dit familielid wilt verwijderen? Hiermee verwijdert u ook alle contributies');">
-                    <i class="fas fa-trash mr-2"></i>
-                    Verwijderen
-                  </a>
-                <?php endif; ?>
-              </td>
-            </tr>
+            <?php if ($member->outstanding_contribution > 0): ?>
+              <tr class="border-b">
+                <td class="px-6 py-4"><?php echo $member->first_name; ?></td>
+                <td class="px-6 py-4 hover:underline hover:text-blue-500"><a href="<?php echo URL_ROOT; ?>/family/listFamilyDetails/<?php echo $member->family_id; ?>"><?php echo $member->last_name; ?></a></td>
+                <td class="px-6 py-4 <?php echo ($member->outstanding_contribution > 0) ? 'text-red-600' : 'text-green-600'; ?>">€<?php echo number_format($member->outstanding_contribution, 2); ?></td>
+                <td class="px-6 py-4 space-x-2">
+                  <?php if ($_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'penningmeester'): ?>
+                    <a href="<?php echo URL_ROOT; ?>/contributions/addContribution/<?php echo $member->id; ?>" class="bg-green-800 hover:bg-green-900 text-white px-4 py-2 rounded-md text-sm">
+                      <i class="fas fa-credit-card mr-2"></i>
+                      Betalen
+                    </a>
+                  <?php endif; ?>
+                  <?php if ($_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'penningmeester'): ?>
+                    <a href="<?php echo URL_ROOT; ?>/contributions/deleteContribution/<?php echo $member->id; ?>" class="bg-green-800 hover:bg-green-900 text-white px-4 py-2 rounded-md text-sm" onclick="return confirm('Weet je zeker dat je deze contributie wilt volledig aflossen?');">
+
+                      <i class="fas fa-money-bill-wave mr-2"></i>
+                      Volledig aflossen
+                    </a>
+                  <?php endif; ?>
+                </td>
+              </tr>
+            <?php endif; ?>
           <?php endforeach; ?>
         </tbody>
       </table>

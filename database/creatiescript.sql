@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS family_members (
   first_name VARCHAR(50) NOT NULL,
   date_of_birth DATE NOT NULL,
   age INT NOT NULL,
+  family_member_type ENUM('vader', 'moeder', 'zoon', 'dochter', 'oom', 'tante', 'neef', 'nicht', 'anders') NOT NULL,
   member_type_id INT NOT NULL,
   family_id INT NOT NULL,
   PRIMARY KEY (id),

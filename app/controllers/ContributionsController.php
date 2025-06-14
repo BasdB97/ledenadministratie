@@ -25,7 +25,7 @@ class ContributionsController extends Controller
     $this->bookyearModel = $this->model('Bookyear');
     $this->familyMemberModel = $this->model('FamilyMember');
     $this->contributionModel = $this->model('Contribution');
-    $this->bookyearId = $this->bookyearModel->getBookyearByYear((int)$_SESSION['bookyear'])->id;
+    $this->bookyearId = $_SESSION['bookyearId'];
   }
 
   public function index()
@@ -102,10 +102,10 @@ class ContributionsController extends Controller
     }
   }
 
-  public function deleteContribution($contributionId)
+  public function deleteContribution($familyMemberId)
   {
-    if ($this->contributionModel->deleteContribution($contributionId)) {
-      flash('contribution_message', 'Contributie succesvol verwijderd', 'alert-success');
+    if ($this->contributionModel->deleteContribution($familyMemberId)) {
+      flash('contribution_message', 'Contributie succesvol afgelost', 'alert-success');
       header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
   }

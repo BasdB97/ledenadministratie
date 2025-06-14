@@ -52,8 +52,9 @@ if (isset($_SESSION['bookyear'])) {
               Boekjaar <span class="text-red-500">*</span>
             </label>
             <select name="year" id="year" class="mt-1 block w-full rounded-md border-2 border-gray-300 px-3 py-2 shadow-sm focus:border-primary focus:ring-2 focus:ring-primary focus:ring-opacity-50" required>
+              <option value="">Selecteer een boekjaar</option>
               <?php foreach ($data['bookyears'] as $bookyear): ?>
-                <option value="<?php echo $bookyear->year; ?>" <?php echo ($bookyear->year == $data['currentYear']) ? 'selected' : ''; ?>>
+                <option>
                   <?php echo $bookyear->year; ?>
                 </option>
               <?php endforeach; ?>

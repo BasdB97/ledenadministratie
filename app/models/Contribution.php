@@ -9,7 +9,7 @@
  * - Controle of contributie bestaat
  * - Contributie toevoegen
  * - Contributie bewerken
- * - Contributie verwijderen
+ * - Contributie verwijderen (bedrag op 0 zetten)
  * 
  */
 class Contribution
@@ -71,12 +71,12 @@ class Contribution
   }
 
 
-  public function deleteContribution($contributionId)
+  public function deleteContribution($familyMemberId)
   {
     try {
       $this->db->beginTransaction();
-      $this->db->query("DELETE FROM contributions WHERE id = :contributionId");
-      $this->db->bind(':contributionId', $contributionId);
+      $this->db->query("UPDATE contributions SET amount = 0 WHERE member_id = :familyMemberId");
+      $this->db->bind(':familyMemberId', $familyMemberId);
       $result = $this->db->execute();
       $this->db->commit();
       return $result;

@@ -4,6 +4,8 @@
  * FamilyController
  * 
  * Controller voor het beheren van families
+ * 
+ * Functies:
  * - Alle families weergeven
  * - Familie toevoegen
  * - Familie bewerken
@@ -75,8 +77,7 @@ class FamilyController extends Controller
     $family = $this->familyModel->getFamilyById($familyId);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $data['family_id'] = $familyId;
-      $data = $this->retrieveFormData();
+      $data = $this->retrieveFormData($familyId);
       $data = validateForm($data);
 
       // Controleer of het adres bestaat en of het adres al bestaat voor een andere familie
@@ -151,10 +152,11 @@ class FamilyController extends Controller
   }
 
   // Functie om de formuliergegevens op te halen en te sanitizen
-  public function retrieveFormData()
+  public function retrieveFormData($familyId = null)
   {
     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $data = [
+      'family_id' => $familyId,
       'last_name' => trim($_POST['last_name']),
       'street' => trim($_POST['street']),
       'house_number' => trim($_POST['house_number']),

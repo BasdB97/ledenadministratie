@@ -40,7 +40,8 @@
       <table class="w-full">
         <thead class="bg-primary text-white">
           <tr>
-            <th class="w-1/6 px-6 py-3 text-left">Naam</th>
+            <th class="w-1/6 px-6 py-3 text-left">Voornaam</th>
+            <th class="w-1/6 px-6 py-3 text-left">Relatie</th>
             <th class="w-1/6 px-6 py-3 text-left">Geboortedatum</th>
             <th class="w-1/6 px-6 py-3 text-left">Leeftijd</th>
             <th class="w-1/6 px-6 py-3 text-left">Type lid</th>
@@ -52,6 +53,7 @@
           <?php foreach ($data['family_members'] as $member) : ?>
             <tr class="hover:bg-gray-50">
               <td class="w-1/6 px-6 py-4 whitespace-nowrap"><?php echo $member->first_name; ?></td>
+              <td class="w-1/6 px-6 py-4 whitespace-nowrap"><?php echo ucfirst($member->family_member_type); ?></td>
               <td class="w-1/6 px-6 py-4 whitespace-nowrap"><?php echo date('d-m-Y', strtotime($member->date_of_birth)); ?></td>
               <td class="w-1/6 px-6 py-4 whitespace-nowrap"><?php echo calculateAge($member->date_of_birth); ?></td>
               <td class="w-1/6 px-6 py-4 whitespace-nowrap"><?php echo $member->member_type; ?></td>
@@ -64,7 +66,7 @@
                   </a>
                 <?php endif; ?>
                 <?php if ($_SESSION['userRole'] == 'admin' || $_SESSION['userRole'] == 'penningmeester'): ?>
-                  <a href="<?php echo URL_ROOT; ?>/contributions/addContribution/<?php echo $member->id; ?>" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm">
+                  <a href="<?php echo URL_ROOT; ?>/contributions/addContribution/<?php echo $member->id; ?>" class="bg-green-800 hover:bg-green-900 text-white px-4 py-2 rounded-md text-sm">
                     <i class="fas fa-credit-card mr-2"></i>
                     Betalen
                   </a>

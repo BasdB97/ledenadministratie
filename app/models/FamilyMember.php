@@ -109,10 +109,11 @@ class FamilyMember
       $this->db->beginTransaction();
 
       // Voeg het familielid toe aan de database
-      $this->db->query("INSERT INTO family_members (first_name, date_of_birth, age, member_type_id, family_id) VALUES (:firstName, :dateOfBirth, :age, :memberTypeId, :familyId)");
+      $this->db->query("INSERT INTO family_members (first_name, date_of_birth, age, family_member_type, member_type_id, family_id) VALUES (:firstName, :dateOfBirth, :age, :familyMemberType, :memberTypeId, :familyId)");
       $this->db->bind(':firstName', $data['first_name']);
       $this->db->bind(':dateOfBirth', $data['date_of_birth']);
       $this->db->bind(':age', $data['age']);
+      $this->db->bind(':familyMemberType', $data['family_member_type']);
       $this->db->bind(':memberTypeId', $data['member_type_id']);
       $this->db->bind(':familyId', $data['family_id']);
       $this->db->execute();
@@ -140,10 +141,11 @@ class FamilyMember
   {
     try {
       $this->db->beginTransaction();
-      $this->db->query("UPDATE family_members SET first_name = :firstName, date_of_birth = :dateOfBirth, age = :age, member_type_id = :memberTypeId, family_id = :familyId WHERE id = :familyMemberId");
+      $this->db->query("UPDATE family_members SET first_name = :firstName, date_of_birth = :dateOfBirth, age = :age, family_member_type = :familyMemberType, member_type_id = :memberTypeId, family_id = :familyId WHERE id = :familyMemberId");
       $this->db->bind(':firstName', $data['first_name']);
       $this->db->bind(':dateOfBirth', $data['date_of_birth']);
       $this->db->bind(':age', $data['age']);
+      $this->db->bind(':familyMemberType', $data['family_member_type']);
       $this->db->bind(':memberTypeId', $data['member_type_id']);
       $this->db->bind(':familyId', $data['family_id']);
       $this->db->bind(':familyMemberId', $data['family_member_id']);
