@@ -15,11 +15,8 @@ Omdat er in dit project niet alle beveiligingsfunctionaliteiten zijn toegepast, 
     git clone https://github.com/BasdB97/ledenadministratie
     ```
 
-    [!IMPORTANT]
+   !IMPORTANT
    Zorg dat de map waar het project in staat `ledenadministratie` heet. Bij het downloaden van het project komt er `-master` achter te staan. Haal dit weg.
-   > [!IMPORTANT]  
-> Crucial information necessary for users to succeed.
-> 
 4. Importeer de database:
 
     - Open phpMyAdmin (http://localhost/phpmyadmin)
