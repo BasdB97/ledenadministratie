@@ -2,8 +2,8 @@
 
 'Ledenadministratie' is een PHP & MySQL CRUD-applicatie voor het beheren van leden en contributies voor een vereniging. Dit project is gemaakt als eindopdracht voor de module PHP & MySQL van de opleiding Front-End Developer van LOI. In de applicatie kunnen families en leden worden toegevoegd, gewijzigd en verwijderd. Per lid wordt er contributie toegevoegd, dit is gekoppeld aan een boekjaar.
 Er zijn 3 accounts beschikbaar met elk hun eigen toegangsniveau. De admin heeft alle rechten, de penningmeester heeft alleen toegang tot de contributies en de secretaris heeft alleen toegang tot het ledenbeheer.
-De applicatie biedt een gebruiksvriendelijke interface waarmee de gebruiker makkelijk leden en contributies kan toevoegen, wijzigen en verwijderen.
-Ook heeft de applicatie enkele beveiligingsfunctionaliteiten zoals het controleren en sanitizen van ingevulde gegevens, hashen van wachtwoorden, routing en een authenticatie systeem.
+De applicatie heeft een gebruiksvriendelijke interface waarmee de gebruiker makkelijk leden en contributies kan toevoegen, wijzigen en verwijderen.
+Ook heeft de applicatie enkele beveiligingsfunctionaliteiten zoals het controleren en sanitizen van ingevulde gegevens, routing en een authenticatie systeem.
 
 Omdat er in dit project niet alle beveiligingsfunctionaliteiten zijn toegepast, is het niet geschikt voor productie maar enkel voor lokaal gebruik.
 
