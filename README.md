@@ -17,6 +17,8 @@ Omdat er in dit project niet alle beveiligingsfunctionaliteiten zijn toegepast, 
 
    !IMPORTANT
    Zorg dat de map waar het project in staat `ledenadministratie` heet. Bij het downloaden van het project komt er `-master` achter te staan. Haal dit weg.
+> [!NOTE]  
+> Highlights information that users should take into account, even when skimming.
 4. Importeer de database:
 
     - Open phpMyAdmin (http://localhost/phpmyadmin)
