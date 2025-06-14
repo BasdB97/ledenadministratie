@@ -10,7 +10,7 @@ Omdat er in dit project niet alle beveiligingsfunctionaliteiten zijn toegepast, 
 ## Installatie
 
 1. Zorg ervoor dat je XAMPP (of vergelijkbare stack) hebt geïnstalleerd met PHP en MySQL
-2. Clone deze repository naar je `htdocs` map:
+2. Clone deze repository, of download het ZIP-bestand, naar je `htdocs` map:
     ```bash
     git clone https://github.com/BasdB97/ledenadministratie
     ```
